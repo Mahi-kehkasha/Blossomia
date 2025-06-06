@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <nav className="navbar navbar-expand-lg fixed-top">
       <div className="container">
@@ -19,27 +29,27 @@ const Navbar: React.FC = () => {
         <button 
           className="navbar-toggler" 
           type="button" 
-          data-bs-toggle="collapse" 
-          data-bs-target="#navbarNav"
+          onClick={toggleMenu}
+          aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
+        <div className={`collapse navbar-collapse ${isMenuOpen ? 'show' : ''}`} id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/">Home</Link>
+              <a className="nav-link" href="#home" onClick={closeMenu}>Home</a>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/about">About</Link>
+              <a className="nav-link" href="#about" onClick={closeMenu}>About</a>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/products">Products</Link>
+              <a className="nav-link" href="#products" onClick={closeMenu}>Products</a>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/services">Services</Link>
+              <a className="nav-link" href="#services" onClick={closeMenu}>Services</a>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/contact">Contact</Link>
+              <a className="nav-link" href="#contact" onClick={closeMenu}>Contact</a>
             </li>
           </ul>
         </div>
